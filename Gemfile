@@ -14,4 +14,4 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'knockoutjs-rails'
-gem 'knockout_forms-rails', path: '~/Projects/knockout_forms-rails'
+gem 'knockout_forms-rails'
