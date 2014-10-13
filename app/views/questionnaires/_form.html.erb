@@ -1,0 +1,52 @@
+<%= knockout_form_for(@questionnaire, model_options: { include: {questions: {methods: :type}} }, html: { class: "ko-form"}) do |f| %>
+
+  <% if @questionnaire.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@questionnaire.errors.count, "error") %> prohibited this questionnaire from being saved:</h2>
+
+      <ul>
+      <% @questionnaire.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+
+  <div>
+    <%= f.fields_for :questions do |g| %>
+      <hr/>
+      <h3>Question</h3>
+      <%= g.hidden_field :id %>
+      <div class="form-group">
+        <%= g.label :text %><br>
+        <%= g.text_field :text %>
+      </div>
+      <div class="form-group">
+        <%= g.label :type %><br>
+        <%= g.select :type, options_for_select(Question.types.map{|t| [t.to_s.titleize, t]}) %>
+      </div>
+      <div class="form-group" data-bind="visible: isNumeric">
+        <%= g.label :max %><br>
+        <%= g.number_field :max %>
+      </div>
+      <%= f.action 'Preview question', 'preview', class: 'btn btn-info' %>
+    <% end %>
+    <hr/>
+  </div>
+
+  <div class="actions">
+    <%= f.add_item :questions, label: "Add new question", viewmodel: 'Question', class: 'btn btn-info' %>
+    <%= f.action 'Preview questionnaire', 'preview', class: 'btn btn-info' %>
+    <%= f.submit "Save", class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', questionnaires_path, class: 'btn btn-warning' %>
+  </div>
+<% end %>
