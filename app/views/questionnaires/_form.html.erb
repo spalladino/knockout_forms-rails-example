@@ -1,4 +1,4 @@
-<%= knockout_form_for(@questionnaire, model_options: { include: {questions: {methods: :type}} }, html: { class: "ko-form"}) do |f| %>
+<%= knockout_form_for(@questionnaire, model_options: { include: {questions: {methods: :type}} }) do |f| %>
 
   <% if @questionnaire.errors.any? %>
     <div id="error_explanation">
