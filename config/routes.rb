@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :users
   resources :questionnaires
-  root 'questionnaires#index'
+
+  root 'users#index'
 end

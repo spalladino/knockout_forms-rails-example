@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140830010542) do
+ActiveRecord::Schema.define(version: 20141013161810) do
 
   create_table "questionnaires", force: true do |t|
     t.string   "title"
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(version: 20140830010542) do
     t.integer  "max"
   end
 
-  add_index "questions", ["questionnaire_id"], name: "index_questions_on_questionnaire_id", using: :btree
+  add_index "questions", ["questionnaire_id"], name: "index_questions_on_questionnaire_id"
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.boolean  "registered"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
